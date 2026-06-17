@@ -1,0 +1,805 @@
+/* -------------------------------------------------------------
+   premium romantic pinterest scrapbook stylesheet
+   crafted with soft vintage aesthetics and responsive grid rules
+   ------------------------------------------------------------- */
+
+:root {
+    --color-dark-red: #8E2F3F;
+    --color-dusty-pink: #E9B7C3;
+    --color-soft-pink: #F7D7DF;
+    --color-warm-white: #FFF9F8;
+    --color-light-blue: #BFD9F2;
+    --color-cream-paper: #F4EADF;
+    --font-serif: 'Georgia', 'Times New Roman', serif;
+    --font-cursive: 'Brush Script MT', 'Comic Sans MS', cursive;
+    --font-sans: 'Helvetica Neue', Arial, sans-serif;
+    --shadow-soft: 0 4px 15px rgba(142, 47, 63, 0.08);
+    --shadow-polaroid: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* reset & global defaults */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--color-warm-white);
+    color: #4A3B32;
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* application of custom svg paper texture globally */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.18;
+    background: transparent;
+    filter: url(#paper-texture);
+}
+
+/* scannable headings & layout structural helpers */
+h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    color: var(--color-dark-red);
+    font-weight: 400;
+}
+
+.text-center { text-align: center; }
+
+/* scroll progress indicator */
+.scroll-progress-track {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    z-index: 2000;
+    background: transparent;
+}
+
+.scroll-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--color-dark-red);
+    transition: width 0.1s linear;
+}
+
+/* custom premium floating music player */
+.music-player-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: rgba(244, 234, 223, 0.9);
+    border: 1px solid var(--color-dusty-pink);
+    padding: 10px 16px;
+    border-radius: 30px;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.music-player-container:hover {
+    transform: translateY(-2px);
+}
+
+.music-toggle-btn {
+    background: var(--color-dark-red);
+    color: var(--color-warm-white);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.music-toggle-btn:hover {
+    background: #6D222E;
+}
+
+.music-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.music-title {
+    font-size: 0.75rem;
+    font-family: var(--font-serif);
+    color: var(--color-dark-red);
+    font-style: italic;
+    white-space: nowrap;
+}
+
+.progress-bar-container {
+    width: 80px;
+    height: 3px;
+    background: rgba(142, 47, 63, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: var(--color-dark-red);
+}
+
+.equalizer {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    width: 16px;
+    height: 16px;
+}
+
+.eq-bar {
+    width: 2px;
+    height: 2px;
+    background-color: var(--color-dark-red);
+    display: inline-block;
+}
+
+.equalizer.playing .eq-bar {
+    animation: bounceEq 0.8s ease infinite alternate;
+}
+
+.equalizer.playing .eq-bar:nth-child(2) { animation-delay: 0.2s; }
+.equalizer.playing .eq-bar:nth-child(3) { animation-delay: 0.4s; }
+.equalizer.playing .eq-bar:nth-child(4) { animation-delay: 0.1s; }
+
+@keyframes bounceEq {
+    0% { height: 2px; }
+    100% { height: 14px; }
+}
+
+/* 1. opening screen layout styling */
+.section-opening {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    background: radial-gradient(circle, #FFF9F8 0%, #F7D7DF 100%);
+    text-align: center;
+}
+
+.opening-content {
+    max-width: 600px;
+    z-index: 10;
+}
+
+.opening-pretitle {
+    font-family: var(--font-cursive);
+    font-size: 1.8rem;
+    color: var(--color-dusty-pink);
+    margin-bottom: 0.5rem;
+    text-transform: lowercase;
+}
+
+.opening-title {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1px;
+    animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.opening-subtitle {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: #6D5B52;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+    font-style: italic;
+}
+
+.btn-premium {
+    background: var(--color-dark-red);
+    color: var(--color-warm-white);
+    border: none;
+    padding: 14px 32px;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(142, 47, 63, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-premium:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(142, 47, 63, 0.3);
+    background: #732431;
+}
+
+/* floating particles background animation */
+.floating-decorations {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.heart-element {
+    position: absolute;
+    color: var(--color-dusty-pink);
+    font-size: 1.5rem;
+    opacity: 0.6;
+    animation: slowFloat 6s ease-in-out infinite alternate;
+}
+
+@keyframes slowFloat {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
+    100% { transform: translateY(-40px) rotate(15deg); opacity: 0.8; }
+}
+
+/* global scrapbook section layout structural wrapping adjustments */
+.scrapbook-wrapper {
+    animation: fadeInPage 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-letter, .section-gallery, .section-notes, .section-final, .section-closing {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.section-heading {
+    font-size: 2.2rem;
+    margin-bottom: 4rem;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section-heading::after {
+    content: "✿";
+    display: block;
+    font-size: 1rem;
+    color: var(--color-dusty-pink);
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+/* 2. welcome letter envelope aesthetics */
+.letter-envelope-container {
+    background: var(--color-cream-paper);
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 3rem;
+    border-radius: 4px;
+    box-shadow: var(--shadow-soft);
+    position: relative;
+}
+
+.letter-paper {
+    background: #FFFDFB;
+    border: 1px solid rgba(233, 183, 195, 0.3);
+    padding: 2.5rem;
+    box-shadow: inset 0 0 40px rgba(244, 234, 223, 0.5);
+    position: relative;
+}
+
+.letter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.letter-date {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: #8C7A6B;
+    font-size: 0.9rem;
+}
+
+.letter-body {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #3D312A;
+}
+
+.letter-body p {
+    margin-bottom: 1.5rem;
+    min-height: 24px;
+}
+
+.letter-footer {
+    text-align: right;
+    margin-top: 3rem;
+}
+
+.handwritten-signature {
+    font-family: var(--font-cursive);
+    font-size: 2.5rem;
+    color: var(--color-dark-red);
+}
+
+/* 3. asymmetric scrapbook collage memory gallery spacing mechanics */
+.collage-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2rem;
+    row-gap: 5rem;
+    position: relative;
+}
+
+.collage-item {
+    position: relative;
+    z-index: 1;
+}
+
+/* polaroid components */
+.polaroid-frame {
+    background: white;
+    padding: 16px 16px 40px 16px;
+    box-shadow: var(--shadow-polaroid);
+    border-radius: 1px;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+.polaroid-frame:hover {
+    transform: scale(1.04) rotate(0deg) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+    z-index: 10;
+}
+
+.image-container {
+    width: 100%;
+    aspect-ratio: 4 / 3; /* foto dalam polaroid utama berganti ke rasio 4:3 */
+    overflow: hidden;
+    background: #EFEFEF;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.polaroid-caption {
+    font-family: var(--font-cursive);
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 16px;
+    color: #4A3E3D;
+}
+
+/* asymmetric placement mapping logic */
+.item-1 { grid-column: 1 / 6; transform: rotate(-3deg); }
+.item-2 { grid-column: 7 / 13; transform: rotate(4deg); margin-top: 3rem; }
+.item-3 { grid-column: 2 / 7; transform: rotate(-2deg); }
+.item-4 { grid-column: 8 / 12; transform: rotate(3deg); }
+.item-5 { grid-column: 4 / 9; transform: rotate(-4deg); }
+
+/* scrapbook handmade analog details & textures overlay decorations */
+.washi-tape-decor {
+    position: absolute;
+    width: 120px;
+    height: 32px;
+    background: rgba(233, 183, 195, 0.6);
+    backdrop-filter: blur(1px);
+    z-index: 5;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.washi-tape-decor.top-left { top: -16px; left: -20px; transform: rotate(-15deg); width: 140px; }
+.tape-angled-1 { top: -20px; left: 20px; transform: rotate(-5deg); background: rgba(191, 217, 242, 0.6); }
+.tape-blue { top: -15px; left: 40px; transform: rotate(8deg); background: rgba(191, 217, 242, 0.5); }
+
+.ticket-stub-decor {
+    position: absolute;
+    top: -40px;
+    right: 20px;
+    background: #EAE0D5;
+    border: 1px dashed var(--color-dark-red);
+    padding: 6px 12px;
+    font-size: 0.7rem;
+    font-family: var(--font-serif);
+    transform: rotate(12deg);
+    z-index: 2;
+}
+
+.doodle-star {
+    position: absolute;
+    top: -25px;
+    left: -20px;
+    z-index: 3;
+    transform: rotate(-20deg);
+}
+
+.postmark-decor {
+    position: absolute;
+    bottom: -30px;
+    right: -20px;
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* torn paper effect utility rules */
+.paper-torn-edge {
+    border-bottom: 2px dashed rgba(0,0,0,0.05);
+}
+
+/* 4. dynamic flexible dynamic memo grid layout architecture */
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2.5rem;
+    padding: 1rem;
+}
+
+.memo-card {
+    background: #FFF;
+    padding: 2rem;
+    box-shadow: var(--shadow-soft);
+    border-radius: 2px;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.memo-card:hover {
+    transform: translateY(-5px) scale(1.02);
+}
+
+.card-color-1 { background-color: #FFFDF9; border-left: 4px solid var(--color-dusty-pink); }
+.card-color-2 { background-color: #F9F5EF; border-left: 4px solid var(--color-light-blue); }
+.card-color-3 { background-color: #FAFAFA; border-left: 4px solid var(--color-soft-pink); }
+.card-color-4 { background-color: #F5EFEB; border-left: 4px solid var(--color-dark-red); }
+.card-color-5 { background-color: #FFFDFB; border-left: 4px solid var(--color-dusty-pink); }
+
+.memo-text {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: #4A3E3D;
+    line-height: 1.8;
+    font-style: italic;
+}
+
+.pin-decor {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: #D66870;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.washi-mini {
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    width: 60px;
+    height: 16px;
+    background: rgba(191, 217, 242, 0.4);
+    transform: rotate(-3deg);
+}
+
+/* 5. premium luxury stitched final letter message block structure */
+.final-message-container {
+    background: var(--color-cream-paper);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow-soft);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.stitched-border {
+    border: 2px dashed rgba(142, 47, 63, 0.3);
+    padding: 3rem 2.5rem;
+    background: #FFFDFB;
+}
+
+.final-title {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    font-style: italic;
+}
+
+.final-body p {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+    color: #3D3430;
+    text-align: justify;
+}
+
+.final-signature {
+    margin-top: 4rem;
+    text-align: right;
+}
+
+.sig-label {
+    font-size: 0.9rem;
+    color: #8C7B74;
+    font-style: italic;
+}
+
+.sig-name {
+    font-family: var(--font-cursive);
+    font-size: 2.8rem;
+    color: var(--color-dark-red);
+    margin-top: 0.5rem;
+}
+
+/* 6. interactive premium luxury subtle closing window view */
+.section-closing {
+    text-align: center;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.butterfly-decor {
+    margin-bottom: 2rem;
+    animation: gentleWing 3s ease-in-out infinite alternate;
+}
+
+@keyframes gentleWing {
+    0% { transform: scaleX(0.8) translateY(0); }
+    100% { transform: scaleX(1.1) translateY(-10px); }
+}
+
+.closing-main-text {
+    font-size: 1.8rem;
+    max-width: 600px;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.closing-subtext {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: #8C7B74;
+    font-style: italic;
+    max-width: 500px;
+}
+
+.flower-petal-container {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1.5rem;
+    font-size: 1.2rem;
+    opacity: 0.5;
+}
+
+/* intersection observer responsive animations standard runtime properties */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* custom generic framework engine animations natively embedded */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInPage {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* -------------------------------------------------------------
+   premium interactive lightbox/modal system definitions
+   ------------------------------------------------------------- */
+.scrapbook-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scrapbook-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(74, 59, 50, 0.4);
+    backdrop-filter: blur(4px);
+}
+
+.modal-wrapper {
+    position: relative;
+    z-index: 10;
+    width: 90%;
+    max-width: 720px; /* kembali ke ukuran asal */
+    transform: scale(0.95) translateY(15px);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scrapbook-modal.active .modal-wrapper {
+    transform: scale(1) translateY(0);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: var(--color-warm-white);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    transform: scale(1.1);
+}
+
+.modal-content-card {
+    background: var(--color-cream-paper);
+    padding: 2rem;
+    border-radius: 4px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr; /* kembali ke perbandingan kolom asal */
+    gap: 2rem;
+    position: relative;
+    border: 1px solid rgba(233, 183, 195, 0.4);
+}
+
+.modal-image-side {
+    background: white;
+    padding: 12px 12px 28px 12px;
+    box-shadow: var(--shadow-polaroid);
+    transform: rotate(-1.5deg);
+}
+
+.modal-image-side img {
+    width: 100%;
+    aspect-ratio: 4 / 3; /* foto di dalam modal/lightbox berganti ke rasio 4:3 */
+    object-fit: cover;
+    display: block;
+}
+
+.modal-text-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding-top: 1rem;
+}
+
+.modal-tape {
+    position: absolute;
+    top: -15px;
+    left: 10px;
+    width: 80px;
+    height: 22px;
+    background: rgba(233, 183, 195, 0.5);
+    transform: rotate(-4deg);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.modal-story-title {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    color: var(--color-dark-red);
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.modal-story-text {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #4A3E3D;
+    font-style: italic;
+}
+
+/* high precision adaptive layout configurations for seamless multi-platform scaling */
+@media (max-width: 992px) {
+    .collage-grid { gap: 1.5rem; row-gap: 3.5rem; }
+    .item-1 { grid-column: 1 / 7; }
+    .item-2 { grid-column: 7 / 13; margin-top: 0; }
+    .item-3 { grid-column: 1 / 7; }
+    .item-4 { grid-column: 7 / 13; }
+    .item-5 { grid-column: 3 / 11; }
+}
+
+@media (max-width: 650px) {
+    .modal-content-card {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    .modal-close-btn {
+        top: 10px;
+        right: 15px;
+        color: var(--color-dark-red);
+        z-index: 20;
+    }
+    .modal-image-side {
+        transform: none;
+    }
+}
+
+@media (max-width: 600px) {
+    html { font-size: 14px; }
+    .section-letter, .section-gallery, .section-notes, .section-final, .section-closing {
+        padding: 4rem 1.2rem;
+    }
+    .opening-title { font-size: 2.5rem; }
+    .letter-envelope-container, .stitched-border { padding: 1.5rem; }
+    .collage-grid { display: flex; flex-direction: column; gap: 3rem; }
+    .collage-item { transform: none !important; width: 100%; }
+    .music-player-container { bottom: 16px; right: 16px; left: 16px; justify-content: space-between; }
+}
+
+/* system preference matching accessibility guardrails */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-delay: 0s !important;
+        animation-duration: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0s !important;
+        scroll-behavior: auto !important;
+    }
+    .reveal-on-scroll { opacity: 1; transform: none; }
+}
